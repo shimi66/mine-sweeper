@@ -68,4 +68,21 @@ server.get('/users', async (req, res) => {
     }
 })
 
+server.post('/scores', async (req, res) => {
+    const {user_id, time, difficulty} = req.body
+    // TODO input check
+    try {
+        const insert_score = await db('scores').insert({user_id, time, difficulty}).returning('id')
+
+        if (insert_score.length > 0) {
+            res.status(201).json({message: `Successful insert of score. ID of insert is ${insert_score}`})
+        }
+        else {
+            res.status(404).json({error: 'Error inserting score'})
+        }
+    } catch (error) {
+        res.status(500).json({error: 'Internal Server Error'})
+    }
+})
+
 module.exports = server

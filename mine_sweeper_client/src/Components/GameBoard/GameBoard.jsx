@@ -5,9 +5,11 @@ import './GameBoard.css'
 import Tile from '../Tile/Tile.jsx'
 import Board from '../../Classes/Board.js'
 import Timer from '../Timer/Timer.jsx'
+import axios from 'axios';
+
 
 function GameBoard() {
-    const { boardState, setBoardState, difficulty, user, time, setTime, setWin } = useContext(GameContext);
+    const { boardState, setBoardState, difficulty, user, user_id, time, setTime, setWin } = useContext(GameContext);
     const navigate = useNavigate()
 
     // Use useRef to keep gameBoard persistent across renders
@@ -31,6 +33,12 @@ function GameBoard() {
         if (gameBoard.game_over == true) {
             if (gameBoard.win == true) {
                 setWin(true)
+                axios.post('http://localhost:4000/scores', {
+                    user_id: user_id,
+                    difficulty: difficulty,
+                    time: time
+                })
+                .then(res => console.log(res))
             } else {
                 setWin(false)
             }
@@ -41,15 +49,15 @@ function GameBoard() {
     useEffect(() => {
         let newGameBoard;
 
-        if (difficulty === 'normal') {
+        if (difficulty === 'Normal') {
             newGameBoard = new Board(10, 10, 10);
             newGameBoard.initBombs();
             newGameBoard.initNonBombs();
-        } else if (difficulty === 'hard') {
+        } else if (difficulty === 'Hard') {
             newGameBoard = new Board(15, 15, 22);
             newGameBoard.initBombs();
             newGameBoard.initNonBombs();
-        } else if (difficulty === 'easy') {
+        } else if (difficulty === 'Easy') {
             newGameBoard = new Board(8, 8, 6);
             newGameBoard.initBombs();
             newGameBoard.initNonBombs();
@@ -89,11 +97,5 @@ function GameBoard() {
         </>
     );
 }
-
-// lets start over, i will describe to you the what i want to display and how i intend for it to work. please make suggestions if you think they will be helpful to the overall design of the code. As we go through this process, ask me any clarifying questions you need in order to better understand what I want as well as what is happening in the code.
-
-// What I want to happen: I have an object 'game_board' and a state of 'boardState' which is a string. game_board has a property called 'board' that is a 2d array of instances of the Tile class. The Tile class holds the 'value' of the tile as well
-
-
 
 export default GameBoard

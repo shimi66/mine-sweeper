@@ -91,6 +91,9 @@ http://localhost:5173
 - [ ] MUI usage
 - [ ] Add seed data of my scores
 
+## Bugs
+- [ ] Clicking play again does not reset the timer
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.

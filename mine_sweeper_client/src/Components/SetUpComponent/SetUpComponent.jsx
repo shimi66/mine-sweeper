@@ -42,9 +42,9 @@ function SetUpComponent() {
                             id="difficulty"
                             value={difficulty}
                             onChange={(event) => setDifficulty(event.target.value)}>
-                        <option value="easy">Easy</option>
-                        <option value="normal">Normal (Default)</option>
-                        <option value="hard">Hard</option>
+                        <option value="Easy">Easy</option>
+                        <option value="Normal">Normal (Default)</option>
+                        <option value="Hard">Hard</option>
                     </select>
                 </div>
                 <div className="play">
