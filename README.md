@@ -101,8 +101,6 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 Erik Voss - [LinkedIn](https://www.linkedin.com/in/erik-voss1/ )
 
 
-
-
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
