@@ -2,7 +2,7 @@ import { createContext, useState } from 'react'
 
 const GameContext = createContext({user: '', setUser: () => {},
                                     user_id: 0, setUser_Id: () => {},
-                                    difficulty: 'normal', setDifficulty: () => {},
+                                    difficulty: 'Normal', setDifficulty: () => {},
                                     time: 0, setTime: () => {},
                                     appState: 'in_settings', setAppState: () => {},
                                     win: false, setWin: () => {},
@@ -12,7 +12,7 @@ const GameContext = createContext({user: '', setUser: () => {},
 export function GameContextProvider({ children }) {
     const [user, setUser] = useState('');
     const [user_id, setUser_Id] = useState(0);
-    const [difficulty, setDifficulty] = useState('normal');
+    const [difficulty, setDifficulty] = useState('Normal');
     const [time, setTime] = useState(0);
     const [win, setWin] = useState(false);
     const [appState, setAppState] = useState('in_settings')
