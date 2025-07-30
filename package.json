@@ -15,5 +15,9 @@
     "url": "https://github.com/Chaos66-dev/mine-sweeper/issues"
   },
   "homepage": "https://github.com/Chaos66-dev/mine-sweeper#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "docker": "^1.0.0",
+    "docker-compose": "^1.2.0"
+  }
 }
