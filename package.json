@@ -19,5 +19,14 @@
   "dependencies": {
     "docker": "^1.0.0",
     "docker-compose": "^1.2.0"
+  },
+  "devDependencies": {
+    "@eslint/css": "^0.10.0",
+    "@eslint/js": "^9.32.0",
+    "@eslint/markdown": "^7.1.0",
+    "eslint": "^9.32.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.3.0",
+    "typescript-eslint": "^8.38.0"
   }
 }

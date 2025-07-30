@@ -1,6 +1,13 @@
+import { BoardTileString } from '../types.js'
 import BoardTile from './Tile.js'
 
 class Board {
+    l: number
+    w: number
+    board: Array<Array<BoardTile>>
+    game_over: boolean
+    win: boolean
+    bombs: number
     constructor(width = 10, length = 10, bombs = 10) {
         this.l = length
         this.w = width
@@ -36,14 +43,14 @@ class Board {
 
     // initializes the bomb placement on the board, default value of 10
     initBombs(){
-        let locations = new Set();
+        let locations = new Set<number>();
 
         while (locations.size < this.bombs) {
             locations.add(Math.floor(Math.random() * (this.l * this.w)));
         }
-        locations = [...locations];
+        const bomb_locations = [...locations];
 
-        for (let loc of locations) {
+        for (let loc of bomb_locations) {
             const rIdx = Math.floor(loc / this.l); // Calculate the row index
             const cIdx = loc % this.w; // Calculate the column index
             console.log(rIdx, cIdx);
@@ -81,7 +88,7 @@ class Board {
         for (let row = 0; row < this.l; row++) {
             for (let col = 0; col < this.w; col++) {
                 if (this.board[row][col].is_bomb == false){
-                    this.board[row][col].value = this.calculateAdjBombs(row, col).toString()
+                    this.board[row][col].value = this.calculateAdjBombs(row, col).toString() as BoardTileString
                 }
             }
         }
@@ -107,20 +114,15 @@ class Board {
             [0, -1],         [0, 1],  // Left,        Right
             [1, -1], [1, 0], [1, 1]  // Bottom-left, Bottom, Bottom-right
         ];
-        let processed = []
-        let queue = [[row, col]]
+        let processed: Array<Array<number>> = []
+        let queue: Array<Array<number>> = [[row, col]]
         if (this.board[row][col].value != '0') {
             this.board[row][col].is_turned = true
             return
         }
 
         while (queue.length > 0) {
-            // console.log(`processed array is ${processed}, length is ${processed.length}`)
-            // console.log(`queue array is ${queue}, length is ${queue.length}`)
-
-            // console.log(queue)
-            let curr = queue.shift()
-            // console.log(`popping ${curr} from queue`)
+            let curr = queue.shift()!
             if (this.board[curr[0]][curr[1]].value == '0') {
                 for (let [dx, dy] of directions) {
                     const newRow = curr[0] + dx;
@@ -131,7 +133,6 @@ class Board {
                         this.board[newRow][newCol].is_turned == false &&
                         !containsCoords(processed, [newRow, newCol]) &&
                         !containsCoords(queue, [newRow, newCol])) {
-                        // console.log(`adding ${[newRow, newCol]} to queue`)
                         queue.push([newRow, newCol])
                     }
                 }
@@ -139,7 +140,6 @@ class Board {
 
             this.board[curr[0]][curr[1]].is_turned = true
             processed.push(curr)
-            // return
         }
 
 
